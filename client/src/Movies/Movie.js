@@ -34,7 +34,9 @@ function Movie(props ) {
       .catch(err => {
         console.log(err)
       })
+    
     push(`/`)
+    window.location.reload(false);
   }
 
 
