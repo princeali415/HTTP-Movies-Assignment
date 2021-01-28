@@ -23,6 +23,22 @@ function Movie(props ) {
     push(`/update-movie/${movie.id}`)
   }
 
+  const handleDelete = () => {
+    axios.delete(`http://localhost:5000/api/movies/${id}`)
+      .then(res => {
+        props.setMovieList(props.movieList.filter(movie => {
+          return movie.id !== id
+        }))
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    push(`/`)
+  }
+
+
+
   useEffect(() => {
     fetchMovie(id);
   }, [id]);
@@ -40,6 +56,9 @@ function Movie(props ) {
       </div>
       <button className="update-button" onClick={updateMovie}>
         Update
+      </button>
+      <button className="delete-button" onClick={handleDelete}>
+        Delete
       </button>
     </div>
   );
